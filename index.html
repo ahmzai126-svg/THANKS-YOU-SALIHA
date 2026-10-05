@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You, Saliha</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;overflow:hidden;font-family:"Segoe UI",Arial,sans-serif;color:#fff;background:radial-gradient(circle at 50% 45%,#26364f 0%,#111827 42%,#05070b 100%)}
+.background{position:fixed;inset:0;overflow:hidden}
+.glow{position:absolute;width:500px;height:500px;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(70,150,255,.12);filter:blur(100px);border-radius:50%;animation:glow 6s ease-in-out infinite}
+@keyframes glow{0%,100%{transform:translate(-50%,-50%) scale(.85);opacity:.4}50%{transform:translate(-50%,-50%) scale(1.15);opacity:.8}}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:0;animation:twinkle 4s infinite}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:.8}}
+.container{height:100vh;display:flex;justify-content:center;align-items:center;padding:25px;position:relative;z-index:2}
+.card{width:min(760px,95vw);padding:60px 45px;text-align:center;border-radius:28px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(18px);box-shadow:0 30px 90px rgba(0,0,0,.5);animation:cardIn 1.3s ease}
+@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.subtitle{font-size:13px;letter-spacing:5px;text-transform:uppercase;color:#9fb7d5;margin-bottom:22px;animation:fadeIn 1s ease .5s both}
+h1{font-size:clamp(48px,9vw,88px);line-height:1;font-weight:700;background:linear-gradient(90deg,#fff,#9bcaff,#fff);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:titleIn 1.2s ease,shine 5s linear infinite}
+@keyframes titleIn{from{opacity:0;letter-spacing:20px;filter:blur(10px)}to{opacity:1;letter-spacing:normal;filter:blur(0)}}
+@keyframes shine{to{background-position:220% center}}
+.line{width:90px;height:2px;margin:32px auto;background:linear-gradient(90deg,transparent,#8fc7ff,transparent);box-shadow:0 0 15px rgba(120,190,255,.6)}
+.message{max-width:620px;min-height:125px;margin:auto;color:#d8e0eb;font-size:18px;line-height:1.85}
+.cursor{display:inline-block;width:2px;height:20px;background:#8fc7ff;margin-left:4px;vertical-align:middle;animation:blink .8s infinite}
+@keyframes blink{50%{opacity:0}}
+button{margin-top:28px;padding:14px 30px;border-radius:50px;border:1px solid rgba(255,255,255,.18);background:rgba(100,170,255,.10);color:white;font-size:15px;letter-spacing:1px;cursor:pointer;transition:.3s}
+button:hover{transform:translateY(-4px);background:rgba(100,170,255,.18);box-shadow:0 12px 35px rgba(70,150,255,.18)}
+.footer{position:fixed;bottom:18px;width:100%;text-align:center;color:rgba(255,255,255,.28);font-size:11px;letter-spacing:3px;z-index:5}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:600px){.card{padding:45px 23px}.subtitle{font-size:10px;letter-spacing:3px}.message{font-size:16px}.glow{width:300px;height:300px}}
+</style>
+</head>
+<body>
+<div class="background"><div class="glow"></div><div id="stars"></div></div>
+<main class="container">
+<section class="card">
+<div class="subtitle">A Note of Appreciation</div>
+<h1>Thank You, Saliha</h1>
+<div class="line"></div>
+<p class="message"><span id="typing"></span><span class="cursor"></span></p>
+<button onclick="changeMessage()">Read Another Note</button>
+</section>
+</main>
+<div class="footer">MADE WITH APPRECIATION • 2026</div>
+<script>
+const stars=document.getElementById("stars");
+for(let i=0;i<90;i++){const star=document.createElement("div");star.className="star";star.style.left=Math.random()*100+"vw";star.style.top=Math.random()*100+"vh";star.style.animationDelay=Math.random()*4+"s";star.style.animationDuration=(2+Math.random()*4)+"s";stars.appendChild(star)}
+const messages=[
+"Saliha, thank you for helping me with my assignments. Your support made the work much easier, and I genuinely appreciate the time and effort you gave me.",
+"Thank you for explaining things, sharing your ideas, and helping me when I got stuck. Your assistance really made a difference.",
+"I appreciate all the help you gave me with assignments and coding. This page is simply a small way of saying thank you.",
+"Whether it was an assignment, an idea, or a piece of code, your help was genuinely useful. Thank you for being there when I needed assistance."
+];
+const typing=document.getElementById("typing");let currentText=messages[0];let character=0;
+function typeText(){if(character<currentText.length){typing.textContent+=currentText.charAt(character);character++;setTimeout(typeText,28)}}
+setTimeout(typeText,1400);
+function changeMessage(){let newText;do{newText=messages[Math.floor(Math.random()*messages.length)]}while(newText===currentText);currentText=newText;character=0;typing.style.opacity="0";setTimeout(()=>{typing.textContent="";typing.style.opacity="1";typeText()},300)}
+</script>
+</body>
+</html>
